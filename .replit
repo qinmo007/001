@@ -1,0 +1,48 @@
+run = "pip install -r requirements.txt && streamlit run app.py --server.headless=true --server.enableCORS=false --server.enableXsrfProtection=false"
+language = "python"
+
+[packager]
+AUTO_PIP = true
+afterInstall = "pip install --upgrade pip"
+
+[env]
+VIRTUAL_ENV = "/root/${PROJECT_DIR}/venv"
+PATH = "${VIRTUAL_ENV}/bin:${PATH}"
+PYTHONPATH = "$PYTHONHOME/lib/python3.10:${VIRTUAL_ENV}/lib/python3.10/site-packages"
+REPLIT_POETRY_PYPI_REPOSITORY = "http://mirrors.csdn.net.cn/repository/csdn-pypi-mirrors/simple"
+MPLBACKEND = "TkAgg"
+POETRY_CACHE_DIR = "/root/${PROJECT_DIR}/.cache/pypoetry"
+STREAMLIT_SERVER_PORT = "8501"
+STREAMLIT_SERVER_ADDRESS = "0.0.0.0"
+STREAMLIT_BROWSER_GATHER_USAGE_STATS = "false"
+PYTHONUNBUFFERED = "1"
+
+[nix]
+channel = "stable-22_11"
+
+[debugger]
+program = "streamlit run app.py"
+support = true
+
+[server]
+port = 8501
+host = "0.0.0.0"
+
+[deployment]
+run = ["sh", "-c", "pip install -r requirements.txt && streamlit run app.py --server.headless=true --server.enableCORS=false"]
+deploymentTarget = "cloudrun"
+
+[hint]
+message = "健康饮食计划生成器已启动！请点击上方的'Webview'按钮查看应用界面。"
+
+[unitTest]
+language = "python"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "requirements.txt", "app.py", "sample_foods.json"]
+
+[languages]
+[languages.python]
+pattern = "**/*.py"
+[languages.python.languageServer]
+start = "pylsp"
